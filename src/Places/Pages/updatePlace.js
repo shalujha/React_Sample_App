@@ -1,7 +1,10 @@
-import React,{useContext} from "react";
-import PlaceList  from "./placeList";
-import {useParams} from "react-router-dom";
-import { AuthContext } from "../../context/auth-context";
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import "./newPlace.css";
+import Button from "react-bootstrap/Button";
+import FormGroup from "react-bootstrap/esm/FormGroup";
+import FormItem  from "./Formitem";
+import { useParams } from "react-router-dom";
 const Dummy=[
     {
         id:"u1",
@@ -29,12 +32,19 @@ const Dummy=[
     }
 ];
 
-const UserPlace=function(){
-    const auth=useContext(AuthContext);
-    var id=useParams().userId;
-    var loaded_places=Dummy.filter(function(place){
-        return place.creator==id;
-    })
-    return <PlaceList items={loaded_places}></PlaceList>
+console.log("Dumy is : ");
+console.log(Dummy);
+function create_form(data){
+    return <FormItem name="update" title={data.title} description={data.description}></FormItem>
 }
-export default UserPlace;
+
+function UpdatePlace() {
+    var placeid=useParams().placeId;
+    console.log("id is : "+ placeid);
+    var loaded_places=Dummy.filter(function(place){
+        return place.id==placeid;
+    })
+    console.log(loaded_places);
+    return loaded_places.map(create_form);
+  }
+export default UpdatePlace;

@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
+import AuthContext from '../../context/auth-context';
 
 export const SidebarData = [
   {
@@ -15,13 +16,13 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'MY PLACES',
+    title: 'ADD PLACE',
     path: '/products',
     cName: 'nav-text'
   },
   {
     title: 'AUTHENTICATE',
-    path: '/products',
+    path: '/auth',
     cName: 'nav-text'
   },
 ];

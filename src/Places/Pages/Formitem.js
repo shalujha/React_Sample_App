@@ -3,12 +3,18 @@ import Form from "react-bootstrap/Form";
 import "./newPlace.css";
 import Button from "react-bootstrap/Button";
 import FormGroup from "react-bootstrap/esm/FormGroup";
-function Place() {
+
+import MyDeleteVerticallyCenteredModal from "./DeleteWarning";
+
+
+
+
+function FormItem(props) {
   const [isActivated,setisActivated]=useState(false);
   const [isValid, setisValid] = useState(false);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(props.title);
   const [Address, setAddress] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(props.description);
   const [error, setError] = useState({
     title: "please enter a valid title",
     description: "description should be atleast 5 letters long",
@@ -53,7 +59,6 @@ function Place() {
     //console.log("button got clicked");
     console.log("title : "+ title);
      console.log("description : "+ description);
-     console.log("address : "+ Address);
   }
   // console.log("title length : "+title.length);
   //   console.log("description length : "+ description.length);
@@ -107,32 +112,13 @@ function Place() {
             <span className="invalid-feedback d-block">{error.description}</span>
           )}
         </Form.Group>
-        <Form.Group
-          className="mb-3 w-100 px-4 form-outline"
-          controlId="exampleForm.ControlTextarea1"
-        >
-          <Form.Label className="float-left">
-            <b>Address</b>
-          </Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={1}
-            required
-            onChange={handleAddressChange}
-            name="Address"
-            value={Address}
-          />
-          {isActivated && Address.length ==0 && (
-            <span className="invalid-feedback d-block">{error.address}</span>
-          )}
-        </Form.Group>
         <div className="px-4" style={{ float: "left" }}>
           <Button variant="danger" type="button" disabled={!(Address.length>=1 || (title.length>0 && description.length>4))} onClick={handleClick}>
-            ADD PLACE
+            {props.name}
           </Button>
         </div>
       </Form>
     </div>
   );
 }
-export default Place;
+export default FormItem;
